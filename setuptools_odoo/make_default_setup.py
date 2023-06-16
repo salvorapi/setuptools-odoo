@@ -8,6 +8,7 @@ import os
 import re
 import subprocess
 import sys
+import shutil
 
 from .core import _get_version, is_installable_addon, make_pkg_requirement
 from .manifest import NoManifestFound, read_manifest
@@ -320,7 +321,7 @@ def clean_setup_addons_dir(addons_dir, odoo_version_override):
     # XXX we may want to clean metapackage_dir/setup.cfg if not universal_wheel
 
     paths_to_remove = [os.path.abspath(p) for p in paths_to_remove]
-    subprocess.check_call(["rm", "-rf"] + paths_to_remove)
+    shutil.rmtree(paths_to_remove)    
 
 
 def check_setup_dir_is_git_clean(addons_dir):
